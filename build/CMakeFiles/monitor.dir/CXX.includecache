@@ -6,6 +6,10 @@
 
 #IncludeRegexTransform: 
 
+../include/format.h
+string
+-
+
 ../include/linux_parser.h
 fstream
 -
@@ -15,6 +19,14 @@ sstream
 -
 string
 -
+
+../include/ncurses_display.h
+curses.h
+-
+process.h
+../include/process.h
+system.h
+../include/system.h
 
 ../include/process.h
 string
@@ -31,6 +43,48 @@ process.h
 ../include/process.h
 processor.h
 ../include/processor.h
+
+/home/fear/projects/htop_project/src/linux_parser.cpp
+linux_parser.h
+/home/fear/projects/htop_project/src/linux_parser.h
+dirent.h
+-
+unistd.h
+-
+string
+-
+vector
+-
+
+/home/fear/projects/htop_project/src/main.cpp
+ncurses_display.h
+/home/fear/projects/htop_project/src/ncurses_display.h
+system.h
+/home/fear/projects/htop_project/src/system.h
+
+/home/fear/projects/htop_project/src/ncurses_display.cpp
+curses.h
+-
+chrono
+-
+string
+-
+thread
+-
+vector
+-
+format.h
+/home/fear/projects/htop_project/src/format.h
+ncurses_display.h
+/home/fear/projects/htop_project/src/ncurses_display.h
+system.h
+/home/fear/projects/htop_project/src/system.h
+
+/home/fear/projects/htop_project/src/processor.cpp
+processor.h
+/home/fear/projects/htop_project/src/processor.h
+linux_parser.h
+/home/fear/projects/htop_project/src/linux_parser.h
 
 /home/fear/projects/htop_project/src/system.cpp
 system.h
