@@ -71,7 +71,16 @@ vector<int> LinuxParser::Pids() {
 float LinuxParser::MemoryUtilization() { return 0.0; }
 
 // TODO: Read and return the system uptime
-long LinuxParser::UpTime() { return 0; }
+long LinuxParser::UpTime() {
+  std::ifstream upfile(kProcDirectory + kUptimeFilename);
+  std::string line;
+  int uptime;
+  if (getline(upfile, line)) {
+    std::istringstream upstring(line);
+    upstring >> uptime;
+    return uptime;
+  }
+}
 
 // TODO: Read and return the number of jiffies for the system
 long LinuxParser::Jiffies() { return 0; }
@@ -105,7 +114,6 @@ int LinuxParser::TotalProcesses() {
   }
 }
 
-// TODO: Read and return the number of running processes
 int LinuxParser::RunningProcesses() {
   std::ifstream my_file(kProcDirectory + kStatFilename);
   if (my_file) {
