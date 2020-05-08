@@ -67,7 +67,7 @@ vector<int> LinuxParser::Pids() {
   return pids;
 }
 
-// TODO: Read and return the system memory utilization
+// done: Read and return the system memory utilization
 float LinuxParser::MemoryUtilization() {
   std::ifstream memfile(kProcDirectory + kMeminfoFilename);
   if (memfile) {
@@ -86,7 +86,7 @@ float LinuxParser::MemoryUtilization() {
   return 0;
 }
 
-// TODO: Read and return the system uptime
+// done: Read and return the system uptime
 long LinuxParser::UpTime() {
   std::ifstream upfile(kProcDirectory + kUptimeFilename);
   std::string line;
@@ -106,10 +106,45 @@ long LinuxParser::Jiffies() { return 0; }
 long LinuxParser::ActiveJiffies(int pid [[maybe_unused]]) { return 0; }
 
 // TODO: Read and return the number of active jiffies for the system
-long LinuxParser::ActiveJiffies() { return 0; }
+long LinuxParser::ActiveJiffies() {
+  std::ifstream my_file(kProcDirectory + kStatFilename);
+  if (my_file) {
+    string line;
+    getline(my_file, line);
+    std::istringstream ajif_string(line);
+    string key;
+    int temp;
+    int kUser_, kNice_, kSystem_, kIRQ_, kSoftIRQ_, kSteal_;
+    ajif_string >> key;
+    if (key == "cpu") {
+      ajif_string >> kUser_ >> kNice_ >> kSystem_;
+      ajif_string >> temp >> temp;
+      ajif_string >> kIRQ_ >> kSoftIRQ_ >> kSteal_;
+    }
+    return kUser_ + kNice_ + kSystem_ + kIRQ_ + kSoftIRQ_ + kSteal_;
+  }
+  return 0;
+}
 
 // TODO: Read and return the number of idle jiffies for the system
-long LinuxParser::IdleJiffies() { return 0; }
+long LinuxParser::IdleJiffies() {
+  std::ifstream my_file(kProcDirectory + kStatFilename);
+  if (my_file) {
+    string line;
+    getline(my_file, line);
+    std::istringstream ajif_string(line);
+    string key;
+    int temp;
+    int kIdle_, kIOwait_;
+    ajif_string >> key;
+    if (key == "cpu") {
+      ajif_string >> temp >> temp >> temp;
+      ajif_string >> kIdle_ >> kIOwait_;
+    }
+    return kIdle_ + kIOwait_;
+  }
+  return 0;
+}
 
 // TODO: Read and return CPU utilization
 vector<string> LinuxParser::CpuUtilization() { return {}; }
