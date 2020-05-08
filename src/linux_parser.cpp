@@ -36,15 +36,15 @@ string LinuxParser::OperatingSystem() {
 
 // DONE: An example of how to read data from the filesystem
 string LinuxParser::Kernel() {
-  string os, kernel;
+  string os, kernel, version;
   string line;
   std::ifstream stream(kProcDirectory + kVersionFilename);
   if (stream.is_open()) {
     std::getline(stream, line);
     std::istringstream linestream(line);
-    linestream >> os >> kernel;
+    linestream >> os >> kernel >> version;
   }
-  return kernel;
+  return version;
 }
 
 // BONUS: Update this to use std::filesystem
@@ -78,24 +78,23 @@ float LinuxParser::MemoryUtilization() {
     mem_string >> key >> value;
     float MemTotal = value;
     getline(memfile, line);
-    std::istringstream mem_string(line);
     mem_string >> key >> value;
     float MemFree = value;
     return (MemTotal - MemFree) / MemTotal;
   }
-}
+  return 0;
 }
 
 // TODO: Read and return the system uptime
 long LinuxParser::UpTime() {
   std::ifstream upfile(kProcDirectory + kUptimeFilename);
   std::string line;
-  int uptime;
+  long uptime;
   if (getline(upfile, line)) {
     std::istringstream upstring(line);
     upstring >> uptime;
-    return uptime;
   }
+  return uptime;
 }
 
 // TODO: Read and return the number of jiffies for the system
@@ -119,7 +118,6 @@ int LinuxParser::TotalProcesses() {
   if (my_file) {
     std::string line, key;
     int value;
-    int count = 0;
     while (getline(my_file, line)) {
       std::istringstream my_line(line);
       my_line >> key >> value;
@@ -128,6 +126,7 @@ int LinuxParser::TotalProcesses() {
       }
     }
   }
+  return 0;
 }
 
 int LinuxParser::RunningProcesses() {
@@ -135,7 +134,6 @@ int LinuxParser::RunningProcesses() {
   if (my_file) {
     string line, key;
     int value;
-    int count = 0;
     while (getline(my_file, line)) {
       std::istringstream my_line(line);
       my_line >> key >> value;
@@ -144,6 +142,7 @@ int LinuxParser::RunningProcesses() {
       }
     }
   }
+  return 0;
 }
 
 // TODO: Read and return the command associated with a process
