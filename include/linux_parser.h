@@ -3,8 +3,8 @@
 
 #include <fstream>
 #include <regex>
+#include <sstream>
 #include <string>
-
 namespace LinuxParser {
 // Paths
 const std::string kProcDirectory{"/proc/"};
