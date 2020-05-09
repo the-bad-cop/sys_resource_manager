@@ -23,6 +23,7 @@ float Process::CpuUtilization() {
   long total_time_seconds = total_time / sysconf(_SC_CLK_TCK);
   CPUUtil_ = (float)total_time_seconds / seconds;
   */
+
   ProcJiffies = LinuxParser::ActiveJiffies(pid);
   TotJiffies = LinuxParser::ActiveJiffies() + LinuxParser::IdleJiffies();
   CPUUtil_ =
@@ -30,6 +31,15 @@ float Process::CpuUtilization() {
   prevTotJiffies = TotJiffies;
   prevProcJiffies = ProcJiffies;
   return CPUUtil_;
+
+  /*
+  long total_time = LinuxParser::ActiveJiffies(pid);
+  long seconds = this->Process::UpTime();
+  long total_time_seconds = total_time / sysconf(_SC_CLK_TCK);
+  long delta_total = total_time_seconds - prev_total_time_seconds;
+  long delta_seconds = seconds - prev_seconds;
+  CPUUtil_ = (float)delta_total / delta_seconds;
+  */
 }
 // done: Return the command that generated this process
 string Process::Command() {
