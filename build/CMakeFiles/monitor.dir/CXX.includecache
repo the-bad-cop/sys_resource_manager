@@ -34,6 +34,12 @@ process.h
 processor.h
 ../include/processor.h
 
+/home/fear/projects/htop_project/src/format.cpp
+format.h
+/home/fear/projects/htop_project/src/format.h
+string
+-
+
 /home/fear/projects/htop_project/src/ncurses_display.cpp
 ncurses_display.h
 /home/fear/projects/htop_project/src/ncurses_display.h
