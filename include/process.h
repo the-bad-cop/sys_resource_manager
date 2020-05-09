@@ -24,6 +24,10 @@ class Process {
   float CPUUtil_;
   std::string RAMUtil_;
   long Uptime_;
+  long prevTotJiffies = 0;
+  long prevProcJiffies = 0;
+  long TotJiffies;
+  long ProcJiffies;
 };
 
 #endif

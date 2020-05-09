@@ -16,15 +16,23 @@ sstream
 string
 -
 
-/home/fear/projects/htop_project/src/linux_parser.cpp
-linux_parser.h
-/home/fear/projects/htop_project/src/linux_parser.h
-dirent.h
+../include/process.h
+string
 -
+
+/home/fear/projects/htop_project/src/process.cpp
+process.h
+/home/fear/projects/htop_project/src/process.h
 unistd.h
+-
+cctype
+-
+sstream
 -
 string
 -
 vector
 -
+linux_parser.h
+/home/fear/projects/htop_project/src/linux_parser.h
 
