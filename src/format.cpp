@@ -11,12 +11,19 @@ using std::string;
 string Format::ElapsedTime(long seconds) {
   long hour;
   long minute;
-  long sec;
   hour = seconds / 3600;
   seconds %= 3600;
   minute = seconds / 60;
   seconds %= 60;
-  sec = seconds;
-  return std::to_string(hour) + ":" + std::to_string(minute) + ":" +
-         std::to_string(sec);
+  string temp, hhmmss = {};
+  temp = std::to_string(hour);
+  temp.insert(0, 2 - temp.length(), '0');
+  hhmmss += temp + ":";
+  temp = std::to_string(minute);
+  temp.insert(0, 2 - temp.length(), '0');
+  hhmmss += temp + ":";
+  temp = std::to_string(seconds);
+  temp.insert(0, 2 - temp.length(), '0');
+  hhmmss += temp;
+  return hhmmss;
 }
