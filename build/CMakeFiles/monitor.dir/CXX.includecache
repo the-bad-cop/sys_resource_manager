@@ -6,10 +6,6 @@
 
 #IncludeRegexTransform: 
 
-../include/format.h
-string
--
-
 ../include/linux_parser.h
 fstream
 -
@@ -20,21 +16,39 @@ sstream
 string
 -
 
-/home/fear/projects/htop_project/src/format.cpp
-format.h
-/home/fear/projects/htop_project/src/format.h
+../include/process.h
 string
 -
 
-/home/fear/projects/htop_project/src/linux_parser.cpp
-linux_parser.h
-/home/fear/projects/htop_project/src/linux_parser.h
-dirent.h
+../include/processor.h
+
+../include/system.h
+string
 -
+vector
+-
+process.h
+../include/process.h
+processor.h
+../include/processor.h
+
+/home/fear/projects/htop_project/src/system.cpp
+system.h
+/home/fear/projects/htop_project/src/system.h
 unistd.h
+-
+cstddef
+-
+set
 -
 string
 -
 vector
 -
+linux_parser.h
+/home/fear/projects/htop_project/src/linux_parser.h
+process.h
+/home/fear/projects/htop_project/src/process.h
+processor.h
+/home/fear/projects/htop_project/src/processor.h
 

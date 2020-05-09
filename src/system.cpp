@@ -24,9 +24,8 @@ vector<Process>& System::Processes() {
   Process* p;
   for (int pid : LinuxParser::Pids()) {
     p = new Process(pid);
-    processes_.push_back(*p);
+    processes_.emplace_back(*p);
   }
-
   return processes_;
 }
 
