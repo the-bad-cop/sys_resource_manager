@@ -20,26 +20,14 @@ string
 string
 -
 
-../include/processor.h
-
-../include/system.h
-string
--
-vector
--
+/home/fear/projects/htop_project/src/process.cpp
 process.h
-../include/process.h
-processor.h
-../include/processor.h
-
-/home/fear/projects/htop_project/src/system.cpp
-system.h
-/home/fear/projects/htop_project/src/system.h
+/home/fear/projects/htop_project/src/process.h
 unistd.h
 -
-cstddef
+cctype
 -
-set
+sstream
 -
 string
 -
@@ -47,8 +35,4 @@ vector
 -
 linux_parser.h
 /home/fear/projects/htop_project/src/linux_parser.h
-process.h
-/home/fear/projects/htop_project/src/process.h
-processor.h
-/home/fear/projects/htop_project/src/processor.h
 
