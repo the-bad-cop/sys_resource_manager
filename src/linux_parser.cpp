@@ -215,13 +215,14 @@ string LinuxParser::User(int pid) {
   string user_value;
   if (user_file.is_open()) {
     string line;
+    string uid = Uid(pid);
     while (getline(user_file, line)) {
       std::replace(line.begin(), line.end(), ':', ' ');
-      int key;
+      string key;
       string temp;
       std::istringstream user_string(line);
       user_string >> user_value >> temp >> key;
-      if (key == pid) {
+      if (key == uid) {
         return user_value;
       }
     }
