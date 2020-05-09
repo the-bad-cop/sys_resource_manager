@@ -100,10 +100,29 @@ long LinuxParser::UpTime() {
 // done: Read and return the number of jiffies for the system
 long LinuxParser::Jiffies() { return 0; }
 
-// done: Read and return the number of active jiffies for a PID
+// TODO: Read and return the number of active jiffies for a PID
 // REMOVE: [[maybe_unused]] once you define the function
-long LinuxParser::ActiveJiffies(int pid [[maybe_unused]]) { return 0; }
+long LinuxParser::ActiveJiffies(int pid) {
+  std::ifstream fpid_jif(kProcDirectory + to_string(pid) + kStatFilename);
+  long value;
 
+  string line, utime, stime, cutime, cstime;
+  if (fpid_jif.is_open()) {
+    getline(fpid_jif, line);
+    std::istringstream jif_str(line);
+    int count = 1;
+    while (jif_str >> value) {
+      if (count == 13) {
+        jif_str >> utime >> stime >> cutime >> cstime;
+        break;
+      }
+    }
+    ++count;
+  }
+  value = std::stol(utime) + std::stol(stime) + std::stol(cutime) +
+          std::stol(cstime);
+  return value;
+}
 // done: Read and return the number of active jiffies for the system
 long LinuxParser::ActiveJiffies() {
   std::ifstream my_file(kProcDirectory + kStatFilename);
@@ -180,7 +199,7 @@ int LinuxParser::RunningProcesses() {
   return 0;
 }
 
-// TODO: Read and return the command associated with a process
+// done: Read and return the command associated with a process
 // REMOVE: [[maybe_unused]] once you define the function
 string LinuxParser::Command(int pid) {
   std::ifstream cmd_file(kProcDirectory + to_string(pid) + kCmdlineFilename);
@@ -249,7 +268,7 @@ string LinuxParser::User(int pid) {
   }
   return user_value;
 }
-// TODO: Read and return the uptime of a process
+// done: Read and return the uptime of a process
 // REMOVE: [[maybe_unused]] once you define the function
 long LinuxParser::UpTime(int pid) {
   std::ifstream up_timef(kProcDirectory + to_string(pid) + kStatFilename);
@@ -262,6 +281,6 @@ long LinuxParser::UpTime(int pid) {
     while (tim_str >> value && count < 22) {
       ++count;
     }
-    return std::stol(value);
   }
+  return std::stol(value);
 }
