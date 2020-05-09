@@ -6,33 +6,49 @@
 
 #IncludeRegexTransform: 
 
-../include/linux_parser.h
-fstream
--
-regex
--
-sstream
--
+../include/format.h
 string
 -
+
+../include/ncurses_display.h
+curses.h
+-
+process.h
+../include/process.h
+system.h
+../include/system.h
 
 ../include/process.h
 string
 -
 
-/home/fear/projects/htop_project/src/process.cpp
-process.h
-/home/fear/projects/htop_project/src/process.h
-unistd.h
--
-cctype
--
-sstream
--
+../include/processor.h
+
+../include/system.h
 string
 -
 vector
 -
-linux_parser.h
-/home/fear/projects/htop_project/src/linux_parser.h
+process.h
+../include/process.h
+processor.h
+../include/processor.h
+
+/home/fear/projects/htop_project/src/ncurses_display.cpp
+ncurses_display.h
+/home/fear/projects/htop_project/src/ncurses_display.h
+curses.h
+-
+chrono
+-
+string
+-
+thread
+-
+vector
+-
+format.h
+/home/fear/projects/htop_project/src/format.h
+system.h
+/home/fear/projects/htop_project/src/system.h
 
