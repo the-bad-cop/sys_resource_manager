@@ -111,13 +111,12 @@ long LinuxParser::ActiveJiffies(int pid) {
     getline(fpid_jif, line);
     std::istringstream jif_str(line);
     int count = 1;
-    while (jif_str >> value) {
-      if (count == 13) {
-        jif_str >> utime >> stime >> cutime >> cstime;
-        break;
-      }
+    string temp;
+    while (count <= 13) {
+      jif_str >> temp;
+      count++;
     }
-    ++count;
+    jif_str >> utime >> stime >> cutime >> cstime;
   }
   value = std::stol(utime) + std::stol(stime) + std::stol(cutime) +
           std::stol(cstime);
