@@ -97,10 +97,10 @@ long LinuxParser::UpTime() {
   return uptime;
 }
 
-// TODO: Read and return the number of jiffies for the system
+// done: Read and return the number of jiffies for the system
 long LinuxParser::Jiffies() { return 0; }
 
-// TODO: Read and return the number of active jiffies for a PID
+// done: Read and return the number of active jiffies for a PID
 // REMOVE: [[maybe_unused]] once you define the function
 long LinuxParser::ActiveJiffies(int pid [[maybe_unused]]) { return 0; }
 
@@ -184,10 +184,24 @@ int LinuxParser::RunningProcesses() {
 // REMOVE: [[maybe_unused]] once you define the function
 string LinuxParser::Command(int pid [[maybe_unused]]) { return string(); }
 
-// TODO: Read and return the memory used by a process
+// done: Read and return the memory used by a process
 // REMOVE: [[maybe_unused]] once you define the function
-string LinuxParser::Ram(int pid [[maybe_unused]]) { return string(); }
-
+string LinuxParser::Ram(int pid) {
+  std::ifstream ram_file(kProcDirectory + to_string(pid) + kStatusFilename);
+  string value;
+  if (ram_file.is_open()) {
+    string line;
+    while (getline(ram_file, line)) {
+      std::istringstream ram_string(line);
+      string key;
+      ram_string >> key >> value;
+      if (key == "VmSize:") {
+        return value;
+      }
+    }
+  }
+  return value;
+}
 // done: Read and return the user ID associated with a process
 // REMOVE: [[maybe_unused]] once you define the function
 string LinuxParser::Uid(int pid) {
@@ -208,7 +222,7 @@ string LinuxParser::Uid(int pid) {
   }
   return uid_value;
 }
-// TODO: Read and return the user associated with a process
+// done: Read and return the user associated with a process
 // REMOVE: [[maybe_unused]] once you define the function
 string LinuxParser::User(int pid) {
   std::ifstream user_file(kPasswordPath);
